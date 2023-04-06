@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Wypozyczalnia2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="IdAdresu" />
+          </Key>
+          <Property Name="IdAdresu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KodPocztowy" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="Miasto" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Ulica" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NumerUlicy" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="IdWypozyczalni" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="IdKlienta" />
+          </Key>
+          <Property Name="IdKlienta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imie" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Nazwisko" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Pesel" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="Haslo" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Samochod">
+          <Key>
+            <PropertyRef Name="IdSamochodu" />
+          </Key>
+          <Property Name="IdSamochodu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MarkaSamochodu" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ModelSamochodu" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RokProduckji" Type="int" />
+          <Property Name="IdWypozyczalni" Type="int" Nullable="false" />
+          <Property Name="CenaZaDzien" Type="int" Nullable="false" />
+          <Property Name="Dostepnosc" Type="bit" Nullable="false" />
+          <Property Name="VIN" Type="char" MaxLength="17" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Wypozyczalnia">
+          <Key>
+            <PropertyRef Name="IdWypozyczalni" />
+          </Key>
+          <Property Name="IdWypozyczalni" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazwaWypożyczalni" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wypozyczenie">
+          <Key>
+            <PropertyRef Name="IdWypożyczenia" />
+          </Key>
+          <Property Name="IdWypożyczenia" Type="int" Nullable="false" />
+          <Property Name="IdKlienta" Type="int" Nullable="false" />
+          <Property Name="IdSamochodu" Type="int" Nullable="false" />
+          <Property Name="DataWypozyczenia" Type="date" Nullable="false" />
+          <Property Name="DataZwrotu" Type="date" />
+        </EntityType>
+        <Association Name="FK__Adres__IdWypozyc__35BCFE0A">
+          <End Role="Wypozyczalnia" Type="Self.Wypozyczalnia" Multiplicity="1" />
+          <End Role="Adres" Type="Self.Adres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wypozyczalnia">
+              <PropertyRef Name="IdWypozyczalni" />
+            </Principal>
+            <Dependent Role="Adres">
+              <PropertyRef Name="IdWypozyczalni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Samochod__IdWypo__32E0915F">
+          <End Role="Wypozyczalnia" Type="Self.Wypozyczalnia" Multiplicity="1" />
+          <End Role="Samochod" Type="Self.Samochod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wypozyczalnia">
+              <PropertyRef Name="IdWypozyczalni" />
+            </Principal>
+            <Dependent Role="Samochod">
+              <PropertyRef Name="IdWypozyczalni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wypozycze__IdKli__38996AB5">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="1" />
+          <End Role="Wypozyczenie" Type="Self.Wypozyczenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="IdKlienta" />
+            </Principal>
+            <Dependent Role="Wypozyczenie">
+              <PropertyRef Name="IdKlienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wypozycze__IdSam__398D8EEE">
+          <End Role="Samochod" Type="Self.Samochod" Multiplicity="1" />
+          <End Role="Wypozyczenie" Type="Self.Wypozyczenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Samochod">
+              <PropertyRef Name="IdSamochodu" />
+            </Principal>
+            <Dependent Role="Wypozyczenie">
+              <PropertyRef Name="IdSamochodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Wypozyczalnia2ModelStoreContainer">
+          <EntitySet Name="Adres" EntityType="Self.Adres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klient" EntityType="Self.Klient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Samochod" EntityType="Self.Samochod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wypozyczalnia" EntityType="Self.Wypozyczalnia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wypozyczenie" EntityType="Self.Wypozyczenie" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Adres__IdWypozyc__35BCFE0A" Association="Self.FK__Adres__IdWypozyc__35BCFE0A">
+            <End Role="Wypozyczalnia" EntitySet="Wypozyczalnia" />
+            <End Role="Adres" EntitySet="Adres" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Samochod__IdWypo__32E0915F" Association="Self.FK__Samochod__IdWypo__32E0915F">
+            <End Role="Wypozyczalnia" EntitySet="Wypozyczalnia" />
+            <End Role="Samochod" EntitySet="Samochod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wypozycze__IdKli__38996AB5" Association="Self.FK__Wypozycze__IdKli__38996AB5">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="Wypozyczenie" EntitySet="Wypozyczenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wypozycze__IdSam__398D8EEE" Association="Self.FK__Wypozycze__IdSam__398D8EEE">
+            <End Role="Samochod" EntitySet="Samochod" />
+            <End Role="Wypozyczenie" EntitySet="Wypozyczenie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Wypozyczalnia2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="IdAdresu" />
+          </Key>
+          <Property Name="IdAdresu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KodPocztowy" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Miasto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ulica" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumerUlicy" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IdWypozyczalni" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Wypozyczalnia" Relationship="Self.FK__Adres__IdWypozyc__35BCFE0A" FromRole="Adres" ToRole="Wypozyczalnia" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="IdKlienta" />
+          </Key>
+          <Property Name="IdKlienta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imie" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nazwisko" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pesel" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Haslo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Wypozyczenie" Relationship="Self.FK__Wypozycze__IdKli__38996AB5" FromRole="Klient" ToRole="Wypozyczenie" />
+        </EntityType>
+        <EntityType Name="Samochod">
+          <Key>
+            <PropertyRef Name="IdSamochodu" />
+          </Key>
+          <Property Name="IdSamochodu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MarkaSamochodu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModelSamochodu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RokProduckji" Type="Int32" />
+          <Property Name="IdWypozyczalni" Type="Int32" Nullable="false" />
+          <Property Name="CenaZaDzien" Type="Int32" Nullable="false" />
+          <Property Name="Dostepnosc" Type="Boolean" Nullable="false" />
+          <Property Name="VIN" Type="String" MaxLength="17" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Wypozyczalnia" Relationship="Self.FK__Samochod__IdWypo__32E0915F" FromRole="Samochod" ToRole="Wypozyczalnia" />
+          <NavigationProperty Name="Wypozyczenie" Relationship="Self.FK__Wypozycze__IdSam__398D8EEE" FromRole="Samochod" ToRole="Wypozyczenie" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Wypozyczalnia">
+          <Key>
+            <PropertyRef Name="IdWypozyczalni" />
+          </Key>
+          <Property Name="IdWypozyczalni" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazwaWypożyczalni" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adres" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Adres1" Relationship="Self.FK__Adres__IdWypozyc__35BCFE0A" FromRole="Wypozyczalnia" ToRole="Adres" />
+          <NavigationProperty Name="Samochod" Relationship="Self.FK__Samochod__IdWypo__32E0915F" FromRole="Wypozyczalnia" ToRole="Samochod" />
+        </EntityType>
+        <EntityType Name="Wypozyczenie">
+          <Key>
+            <PropertyRef Name="IdWypożyczenia" />
+          </Key>
+          <Property Name="IdWypożyczenia" Type="Int32" Nullable="false" />
+          <Property Name="IdKlienta" Type="Int32" Nullable="false" />
+          <Property Name="IdSamochodu" Type="Int32" Nullable="false" />
+          <Property Name="DataWypozyczenia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataZwrotu" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Klient" Relationship="Self.FK__Wypozycze__IdKli__38996AB5" FromRole="Wypozyczenie" ToRole="Klient" />
+          <NavigationProperty Name="Samochod" Relationship="Self.FK__Wypozycze__IdSam__398D8EEE" FromRole="Wypozyczenie" ToRole="Samochod" />
+        </EntityType>
+        <Association Name="FK__Adres__IdWypozyc__35BCFE0A">
+          <End Role="Wypozyczalnia" Type="Self.Wypozyczalnia" Multiplicity="1" />
+          <End Role="Adres" Type="Self.Adres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wypozyczalnia">
+              <PropertyRef Name="IdWypozyczalni" />
+            </Principal>
+            <Dependent Role="Adres">
+              <PropertyRef Name="IdWypozyczalni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wypozycze__IdKli__38996AB5">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="1" />
+          <End Role="Wypozyczenie" Type="Self.Wypozyczenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="IdKlienta" />
+            </Principal>
+            <Dependent Role="Wypozyczenie">
+              <PropertyRef Name="IdKlienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Samochod__IdWypo__32E0915F">
+          <End Role="Wypozyczalnia" Type="Self.Wypozyczalnia" Multiplicity="1" />
+          <End Role="Samochod" Type="Self.Samochod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wypozyczalnia">
+              <PropertyRef Name="IdWypozyczalni" />
+            </Principal>
+            <Dependent Role="Samochod">
+              <PropertyRef Name="IdWypozyczalni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wypozycze__IdSam__398D8EEE">
+          <End Role="Samochod" Type="Self.Samochod" Multiplicity="1" />
+          <End Role="Wypozyczenie" Type="Self.Wypozyczenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Samochod">
+              <PropertyRef Name="IdSamochodu" />
+            </Principal>
+            <Dependent Role="Wypozyczenie">
+              <PropertyRef Name="IdSamochodu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Wypozyczalnia2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adres" EntityType="Self.Adres" />
+          <EntitySet Name="Klient" EntityType="Self.Klient" />
+          <EntitySet Name="Samochod" EntityType="Self.Samochod" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Wypozyczalnia" EntityType="Self.Wypozyczalnia" />
+          <EntitySet Name="Wypozyczenie" EntityType="Self.Wypozyczenie" />
+          <AssociationSet Name="FK__Adres__IdWypozyc__35BCFE0A" Association="Self.FK__Adres__IdWypozyc__35BCFE0A">
+            <End Role="Wypozyczalnia" EntitySet="Wypozyczalnia" />
+            <End Role="Adres" EntitySet="Adres" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wypozycze__IdKli__38996AB5" Association="Self.FK__Wypozycze__IdKli__38996AB5">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="Wypozyczenie" EntitySet="Wypozyczenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Samochod__IdWypo__32E0915F" Association="Self.FK__Samochod__IdWypo__32E0915F">
+            <End Role="Wypozyczalnia" EntitySet="Wypozyczalnia" />
+            <End Role="Samochod" EntitySet="Samochod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wypozycze__IdSam__398D8EEE" Association="Self.FK__Wypozycze__IdSam__398D8EEE">
+            <End Role="Samochod" EntitySet="Samochod" />
+            <End Role="Wypozyczenie" EntitySet="Wypozyczenie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Wypozyczalnia2ModelStoreContainer" CdmEntityContainer="Wypozyczalnia2Entities">
+          <EntitySetMapping Name="Adres">
+            <EntityTypeMapping TypeName="Wypozyczalnia2Model.Adres">
+              <MappingFragment StoreEntitySet="Adres">
+                <ScalarProperty Name="IdAdresu" ColumnName="IdAdresu" />
+                <ScalarProperty Name="KodPocztowy" ColumnName="KodPocztowy" />
+                <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="NumerUlicy" ColumnName="NumerUlicy" />
+                <ScalarProperty Name="IdWypozyczalni" ColumnName="IdWypozyczalni" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klient">
+            <EntityTypeMapping TypeName="Wypozyczalnia2Model.Klient">
+              <MappingFragment StoreEntitySet="Klient">
+                <ScalarProperty Name="IdKlienta" ColumnName="IdKlienta" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Pesel" ColumnName="Pesel" />
+                <ScalarProperty Name="Haslo" ColumnName="Haslo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Samochod">
+            <EntityTypeMapping TypeName="Wypozyczalnia2Model.Samochod">
+              <MappingFragment StoreEntitySet="Samochod">
+                <ScalarProperty Name="IdSamochodu" ColumnName="IdSamochodu" />
+                <ScalarProperty Name="MarkaSamochodu" ColumnName="MarkaSamochodu" />
+                <ScalarProperty Name="ModelSamochodu" ColumnName="ModelSamochodu" />
+                <ScalarProperty Name="RokProduckji" ColumnName="RokProduckji" />
+                <ScalarProperty Name="IdWypozyczalni" ColumnName="IdWypozyczalni" />
+                <ScalarProperty Name="CenaZaDzien" ColumnName="CenaZaDzien" />
+                <ScalarProperty Name="Dostepnosc" ColumnName="Dostepnosc" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Wypozyczalnia2Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wypozyczalnia">
+            <EntityTypeMapping TypeName="Wypozyczalnia2Model.Wypozyczalnia">
+              <MappingFragment StoreEntitySet="Wypozyczalnia">
+                <ScalarProperty Name="IdWypozyczalni" ColumnName="IdWypozyczalni" />
+                <ScalarProperty Name="NazwaWypożyczalni" ColumnName="NazwaWypożyczalni" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wypozyczenie">
+            <EntityTypeMapping TypeName="Wypozyczalnia2Model.Wypozyczenie">
+              <MappingFragment StoreEntitySet="Wypozyczenie">
+                <ScalarProperty Name="IdWypożyczenia" ColumnName="IdWypożyczenia" />
+                <ScalarProperty Name="IdKlienta" ColumnName="IdKlienta" />
+                <ScalarProperty Name="IdSamochodu" ColumnName="IdSamochodu" />
+                <ScalarProperty Name="DataWypozyczenia" ColumnName="DataWypozyczenia" />
+                <ScalarProperty Name="DataZwrotu" ColumnName="DataZwrotu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

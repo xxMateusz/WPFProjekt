@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a1df095b2bbb48fda6e3da7c1be27472" Name="Diagram1">
+        <EntityTypeShape EntityType="Wypozyczalnia2Model.Adres" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Wypozyczalnia2Model.Klient" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Wypozyczalnia2Model.Samochod" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Wypozyczalnia2Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Wypozyczalnia2Model.Wypozyczalnia" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Wypozyczalnia2Model.Wypozyczenie" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="Wypozyczalnia2Model.FK__Adres__IdWypozyc__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="Wypozyczalnia2Model.FK__Wypozycze__IdKli__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="Wypozyczalnia2Model.FK__Samochod__IdWypo__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="Wypozyczalnia2Model.FK__Wypozycze__IdSam__398D8EEE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
