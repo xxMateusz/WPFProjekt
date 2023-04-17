@@ -10,24 +10,22 @@
 namespace WPFProjekt
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Wypozyczalnia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Wypozyczalnia()
         {
-            this.Adres1 = new HashSet<Adres>();
-            this.Samochod = new HashSet<Samochod>();
+            this.Samochod = new ObservableCollection<Samochod>();
         }
     
         public int IdWypozyczalni { get; set; }
         public string NazwaWypożyczalni { get; set; }
-        public string Adres { get; set; }
+        public Nullable<int> IdAdres { get; set; }
     
+        public virtual Adres Adres { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Adres> Adres1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Samochod> Samochod { get; set; }
+        public virtual ObservableCollection<Samochod> Samochod { get; set; }
     }
 }

@@ -10,14 +10,14 @@
 namespace WPFProjekt
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Samochod
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Samochod()
         {
-            this.Wypozyczenie = new HashSet<Wypozyczenie>();
+            this.Wypozyczenie = new ObservableCollection<Wypozyczenie>();
         }
     
         public int IdSamochodu { get; set; }
@@ -31,6 +31,6 @@ namespace WPFProjekt
     
         public virtual Wypozyczalnia Wypozyczalnia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Wypozyczenie> Wypozyczenie { get; set; }
+        public virtual ObservableCollection<Wypozyczenie> Wypozyczenie { get; set; }
     }
 }
