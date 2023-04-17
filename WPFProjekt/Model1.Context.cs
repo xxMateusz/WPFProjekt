@@ -13,10 +13,10 @@ namespace WPFProjekt
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Wypozyczalnia2Entities : DbContext
+    public partial class Wypozyczalnia2Entities1 : DbContext
     {
-        public Wypozyczalnia2Entities()
-            : base("name=Wypozyczalnia2Entities")
+        public Wypozyczalnia2Entities1()
+            : base("name=Wypozyczalnia2Entities1")
         {
         }
     

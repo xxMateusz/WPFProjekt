@@ -10,14 +10,14 @@
 namespace WPFProjekt
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Klient
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Klient()
         {
-            this.Wypozyczenie = new HashSet<Wypozyczenie>();
+            this.Wypozyczenie = new ObservableCollection<Wypozyczenie>();
         }
     
         public int IdKlienta { get; set; }
@@ -27,6 +27,6 @@ namespace WPFProjekt
         public string Haslo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Wypozyczenie> Wypozyczenie { get; set; }
+        public virtual ObservableCollection<Wypozyczenie> Wypozyczenie { get; set; }
     }
 }

@@ -14,7 +14,6 @@
           <Property Name="Miasto" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Ulica" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="NumerUlicy" Type="char" MaxLength="4" Nullable="false" />
-          <Property Name="IdWypozyczalni" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Klient">
           <Key>
@@ -55,7 +54,7 @@
           </Key>
           <Property Name="IdWypozyczalni" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NazwaWypożyczalni" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Adres" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="IdAdres" Type="int" />
         </EntityType>
         <EntityType Name="Wypozyczenie">
           <Key>
@@ -67,18 +66,6 @@
           <Property Name="DataWypozyczenia" Type="date" Nullable="false" />
           <Property Name="DataZwrotu" Type="date" />
         </EntityType>
-        <Association Name="FK__Adres__IdWypozyc__35BCFE0A">
-          <End Role="Wypozyczalnia" Type="Self.Wypozyczalnia" Multiplicity="1" />
-          <End Role="Adres" Type="Self.Adres" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Wypozyczalnia">
-              <PropertyRef Name="IdWypozyczalni" />
-            </Principal>
-            <Dependent Role="Adres">
-              <PropertyRef Name="IdWypozyczalni" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Samochod__IdWypo__32E0915F">
           <End Role="Wypozyczalnia" Type="Self.Wypozyczalnia" Multiplicity="1" />
           <End Role="Samochod" Type="Self.Samochod" Multiplicity="*" />
@@ -88,6 +75,18 @@
             </Principal>
             <Dependent Role="Samochod">
               <PropertyRef Name="IdWypozyczalni" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wypozycza__IdAdr__47DBAE45">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Wypozyczalnia" Type="Self.Wypozyczalnia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="IdAdresu" />
+            </Principal>
+            <Dependent Role="Wypozyczalnia">
+              <PropertyRef Name="IdAdres" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -122,13 +121,13 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wypozyczalnia" EntityType="Self.Wypozyczalnia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wypozyczenie" EntityType="Self.Wypozyczenie" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Adres__IdWypozyc__35BCFE0A" Association="Self.FK__Adres__IdWypozyc__35BCFE0A">
-            <End Role="Wypozyczalnia" EntitySet="Wypozyczalnia" />
-            <End Role="Adres" EntitySet="Adres" />
-          </AssociationSet>
           <AssociationSet Name="FK__Samochod__IdWypo__32E0915F" Association="Self.FK__Samochod__IdWypo__32E0915F">
             <End Role="Wypozyczalnia" EntitySet="Wypozyczalnia" />
             <End Role="Samochod" EntitySet="Samochod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wypozycza__IdAdr__47DBAE45" Association="Self.FK__Wypozycza__IdAdr__47DBAE45">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Wypozyczalnia" EntitySet="Wypozyczalnia" />
           </AssociationSet>
           <AssociationSet Name="FK__Wypozycze__IdKli__38996AB5" Association="Self.FK__Wypozycze__IdKli__38996AB5">
             <End Role="Klient" EntitySet="Klient" />
@@ -153,8 +152,7 @@
           <Property Name="Miasto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Ulica" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NumerUlicy" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="IdWypozyczalni" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Wypozyczalnia" Relationship="Self.FK__Adres__IdWypozyc__35BCFE0A" FromRole="Adres" ToRole="Wypozyczalnia" />
+          <NavigationProperty Name="Wypozyczalnia" Relationship="Self.FK__Wypozycza__IdAdr__47DBAE45" FromRole="Adres" ToRole="Wypozyczalnia" />
         </EntityType>
         <EntityType Name="Klient">
           <Key>
@@ -198,8 +196,8 @@
           </Key>
           <Property Name="IdWypozyczalni" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NazwaWypożyczalni" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Adres" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Adres1" Relationship="Self.FK__Adres__IdWypozyc__35BCFE0A" FromRole="Wypozyczalnia" ToRole="Adres" />
+          <Property Name="IdAdres" Type="Int32" />
+          <NavigationProperty Name="Adres" Relationship="Self.FK__Wypozycza__IdAdr__47DBAE45" FromRole="Wypozyczalnia" ToRole="Adres" />
           <NavigationProperty Name="Samochod" Relationship="Self.FK__Samochod__IdWypo__32E0915F" FromRole="Wypozyczalnia" ToRole="Samochod" />
         </EntityType>
         <EntityType Name="Wypozyczenie">
@@ -214,15 +212,15 @@
           <NavigationProperty Name="Klient" Relationship="Self.FK__Wypozycze__IdKli__38996AB5" FromRole="Wypozyczenie" ToRole="Klient" />
           <NavigationProperty Name="Samochod" Relationship="Self.FK__Wypozycze__IdSam__398D8EEE" FromRole="Wypozyczenie" ToRole="Samochod" />
         </EntityType>
-        <Association Name="FK__Adres__IdWypozyc__35BCFE0A">
-          <End Role="Wypozyczalnia" Type="Self.Wypozyczalnia" Multiplicity="1" />
-          <End Role="Adres" Type="Self.Adres" Multiplicity="*" />
+        <Association Name="FK__Wypozycza__IdAdr__47DBAE45">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Wypozyczalnia" Type="Self.Wypozyczalnia" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Wypozyczalnia">
-              <PropertyRef Name="IdWypozyczalni" />
+            <Principal Role="Adres">
+              <PropertyRef Name="IdAdresu" />
             </Principal>
-            <Dependent Role="Adres">
-              <PropertyRef Name="IdWypozyczalni" />
+            <Dependent Role="Wypozyczalnia">
+              <PropertyRef Name="IdAdres" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -262,16 +260,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Wypozyczalnia2Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Wypozyczalnia2Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Adres" EntityType="Self.Adres" />
           <EntitySet Name="Klient" EntityType="Self.Klient" />
           <EntitySet Name="Samochod" EntityType="Self.Samochod" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Wypozyczalnia" EntityType="Self.Wypozyczalnia" />
           <EntitySet Name="Wypozyczenie" EntityType="Self.Wypozyczenie" />
-          <AssociationSet Name="FK__Adres__IdWypozyc__35BCFE0A" Association="Self.FK__Adres__IdWypozyc__35BCFE0A">
-            <End Role="Wypozyczalnia" EntitySet="Wypozyczalnia" />
+          <AssociationSet Name="FK__Wypozycza__IdAdr__47DBAE45" Association="Self.FK__Wypozycza__IdAdr__47DBAE45">
             <End Role="Adres" EntitySet="Adres" />
+            <End Role="Wypozyczalnia" EntitySet="Wypozyczalnia" />
           </AssociationSet>
           <AssociationSet Name="FK__Wypozycze__IdKli__38996AB5" Association="Self.FK__Wypozycze__IdKli__38996AB5">
             <End Role="Klient" EntitySet="Klient" />
@@ -291,7 +289,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Wypozyczalnia2ModelStoreContainer" CdmEntityContainer="Wypozyczalnia2Entities">
+        <EntityContainerMapping StorageEntityContainer="Wypozyczalnia2ModelStoreContainer" CdmEntityContainer="Wypozyczalnia2Entities1">
           <EntitySetMapping Name="Adres">
             <EntityTypeMapping TypeName="Wypozyczalnia2Model.Adres">
               <MappingFragment StoreEntitySet="Adres">
@@ -300,7 +298,6 @@
                 <ScalarProperty Name="Miasto" ColumnName="Miasto" />
                 <ScalarProperty Name="Ulica" ColumnName="Ulica" />
                 <ScalarProperty Name="NumerUlicy" ColumnName="NumerUlicy" />
-                <ScalarProperty Name="IdWypozyczalni" ColumnName="IdWypozyczalni" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -345,7 +342,7 @@
               <MappingFragment StoreEntitySet="Wypozyczalnia">
                 <ScalarProperty Name="IdWypozyczalni" ColumnName="IdWypozyczalni" />
                 <ScalarProperty Name="NazwaWypożyczalni" ColumnName="NazwaWypożyczalni" />
-                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="IdAdres" ColumnName="IdAdres" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

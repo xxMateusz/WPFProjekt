@@ -1,24 +1,40 @@
-﻿<Window x:Class="WPFProjekt.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFProjekt"
+        xmlns:UserControls="clr-namespace:WPFProjekt.UserControls" xmlns:Properties="clr-namespace:WPFProjekt.Properties" x:Class="WPFProjekt.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Background="#FF747079">
+    <Grid Background="#FF468EEF">
         <TextBox HorizontalAlignment="Left" Height="25" Margin="203,140,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" Width="225" Background="#FFA4A4A4" />
         <Button Content="Zaloguj" HorizontalAlignment="Left" Height="32" Margin="203,244,0,0" VerticalAlignment="Top" Width="149" Click="Button_Click" Background="#FFA4A4A4"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="19" Margin="203,165,0,0" VerticalAlignment="Top" Width="225">
-            <PasswordBox/>
+            <ComboBox x:Name="Login"  HorizontalAlignment="Left" Height="19" ItemsSource="{Binding}" VerticalAlignment="Top" Width="225" Text="IdKlienta" SelectionChanged="ComboBox_SelectionChanged">
+                <DataGrid />
+                <ComboBoxItem>
+                    <ComboBoxItem.DataContext>
+                        <local:Klient/>
+                    </ComboBoxItem.DataContext>
+                </ComboBoxItem>
+            </ComboBox>
         </Border>
+
+        <Button Content="" HorizontalAlignment="Left" Margin="243,64,0,0" VerticalAlignment="Top" Height="76" Width="143" Click="Button_Click3">
+            <Button.Background>
+                <ImageBrush ImageSource="\zdjecie.jpg"/>
+            </Button.Background>
+        </Button>
         <TextBox HorizontalAlignment="Left" Height="18" Margin="203,189,0,0" TextWrapping="Wrap" Text="Haslo" VerticalAlignment="Top" Width="225" Background="#FFA4A4A4"/>
         <PasswordBox HorizontalAlignment="Left" Height="18" Margin="203,207,0,0" VerticalAlignment="Top" Width="225"/>
-        <TextBox HorizontalAlignment="Left" Height="72" Margin="118,47,0,0" FontSize="40" TextWrapping="Wrap" Text="Wypożycz samochód marzeń" VerticalAlignment="Top" Width="551" TextChanged="TextBox_TextChanged" Background="#FFA4A4A4"/>
+
         <Image HorizontalAlignment="Left" Height="154" Margin="472,184,0,0" VerticalAlignment="Top" Width="197">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="/zdjecie.jpg" Stretch="None"/>
             </Image.OpacityMask>
         </Image>
+        <TextBox HorizontalAlignment="Left" Height="49" Margin="226,10,0,0" TextWrapping="Wrap" TextAlignment="Center" Background="Aquamarine" Text="Wypożyczalnie" VerticalAlignment="Top" Width="188" TextChanged="TextBox_TextChanged"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="45" Margin="386,260,0,0" VerticalAlignment="Top" Width="133" Click="Button_Click_1"/>
     </Grid>
 </Window>
