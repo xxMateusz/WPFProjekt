@@ -159,6 +159,12 @@ namespace WPFProjekt
         {
 
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Window3 window3 = new Window3();
+            window3.Show();
+        }
     }
 
     public class window2

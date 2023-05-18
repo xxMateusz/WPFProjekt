@@ -1,0 +1,52 @@
+﻿<Window x:Class="WPFProjekt.Window3"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFProjekt"
+        mc:Ignorable="d"
+        Title="Window3" Height="450" Width="800">
+    <Grid Background="#FF468EEF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Imię:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="182,0,0,0"/>
+        <TextBox x:Name="ImieTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,8,0,0" Width="268" Grid.RowSpan="2" Background="#FF13FBEB"/>
+
+        <Label Content="Nazwisko:" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="177,0,0,0"/>
+        <TextBox x:Name="NazwiskoTextBox" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,8,0,0" Width="268" Grid.RowSpan="2" Background="#FF13FBEB"/>
+
+        <Label Content="PESEL:" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,575,0"/>
+        <TextBox x:Name="PeselTextBox" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,8,0,0" Width="268" Grid.RowSpan="2" Background="#FF13FBEB"/>
+
+        <Label Content="Hasło:" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="182,0,0,0"/>
+        <PasswordBox x:Name="HasloPasswordBox" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,8,0,0" Width="268" Grid.RowSpan="5" Background="#FF13FBEB"/>
+
+        <Button Content="Dodaj" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Top" Click="DodajButton_Click" Width="130" Margin="314,19,0,0">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF2BDCC8" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Wróć do logowania" HorizontalAlignment="Left" Height="22" Margin="314,58,0,0" Grid.Row="7" VerticalAlignment="Top" Width="130" Click="Button_Click" Background="#FF0FB188"/>
+        <TextBlock Text="Lista klientów" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,82,0,0" Grid.Row="7"/>
+
+        <DataGrid x:Name="dgKlienci" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,113,0,0" AutoGenerateColumns="False" Height="120" Width="455" Grid.Row="7" SelectionChanged="dgKlienci_SelectionChanged" Background="#FF13FBEB">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Imię" Binding="{Binding Imie}" Width="*" />
+                <DataGridTextColumn Header="Nazwisko" Binding="{Binding Nazwisko}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Klienci" HorizontalAlignment="Left" Height="35" Margin="314,238,0,0" Grid.Row="7" VerticalAlignment="Top" Width="79" Click="Button_Click_1" Background="#FF13FBEB"/>
+    </Grid>
+    </Window>
