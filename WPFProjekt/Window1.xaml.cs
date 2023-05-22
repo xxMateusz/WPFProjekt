@@ -145,7 +145,7 @@ namespace WPFProjekt
 
             // Create a DataView using the DataTable.
             view = new DataView(table);
-
+            ///hff
             // Set a DataGrid control's DataSource to the DataView.
           //  this.adresyGrid.DataSource = view;
         }

@@ -234,38 +234,40 @@ namespace WPFProjekt
             }
         }
 
-      
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            int liczbaDni;
-            if (int.TryParse(iloscDni.Text, out liczbaDni))
-                {
+        { }
 
-                    SqlCommand command = new SqlCommand(queryString, connection);
-                    if (Modele1.SelectedItem != null)
-                    {
-                    DataRowView selectedRow = (DataRowView)Modele1.SelectedItem;
-                    int cenaZaDzien = Convert.ToInt32(selectedRow["CenaZaDzien"]);
-                    int wynik = liczbaDni * cenaZaDzien;
-                                System.Windows.MessageBox.Show("Wynik: " + wynik.ToString());
-                            }
-                        }
-                        finally
-                        {
-                            reader.Close();
-                        }
-                    }
-                    else
-                    {
-                    System.Windows.MessageBox.Show("Wybierz model samochodu.");
-                }
-            }
-            else
-            {
-                System.Windows.MessageBox.Show("Podaj poprawną liczbę dni.");
-            }
-        }
+//        private void Button_Click_1(object sender, RoutedEventArgs e)
+//        {
+//            int liczbaDni;
+//            if (int.TryParse(iloscDni.Text, out liczbaDni))
+//            {
+
+        //                SqlCommand command = new SqlCommand(queryString, connection);
+        //                if (Modele1.SelectedItem != null)
+        //                {
+        //                    DataRowView selectedRow = (DataRowView)Modele1.SelectedItem;
+        //                    int cenaZaDzien = Convert.ToInt32(selectedRow["CenaZaDzien"]);
+        //                    int wynik = liczbaDni * cenaZaDzien;
+        //                    System.Windows.MessageBox.Show("Wynik: " + wynik.ToString());
+        //                }
+
+        //                        finally
+        //                        {
+        //                    reader.Close();
+        //                }     }
+        //                    }
+        //                    else
+        //                    {
+        //                    System.Windows.MessageBox.Show("Wybierz model samochodu.");
+        //                }
+        //            }
+        //            else
+        //{
+        //    System.Windows.MessageBox.Show("Podaj poprawną liczbę dni.");
+        //}
+
         //public IEnumerable<DataGridRow> GetDataGridRows(System.Windows.Controls.DataGrid grid)
         //{
         //    var itemsSource = grid.ItemsSource as IEnumerable;
@@ -276,7 +278,7 @@ namespace WPFProjekt
         //        if (null != row) yield return row;
         //    }
         //}
-      
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
