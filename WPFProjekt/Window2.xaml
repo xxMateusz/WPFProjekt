@@ -34,8 +34,17 @@
         </DataGrid>
         <Button Content="Pokaż Wszystkie" HorizontalAlignment="Left" Height="27" Margin="203,184,0,0" VerticalAlignment="Top" Width="225" Click="Button_Click" Background="#FF0CE8D9"/>
         <DataGrid Name ="Models"  HorizontalAlignment="Left" Height="0" Margin="548,0,0,0" VerticalAlignment="Center" Width="42"  AutoGenerateColumns="True" ItemsSource="{Binding}" SelectionChanged="DataGrid_SelectionChanged_2"/>
-        <TextBox x:Name ="iloscDni" HorizontalAlignment="Left" Height="40" Margin="158,298,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="203" TextChanged="TextBox_TextChanged" Background="#FF0CE8D9" />
-        <Button Content="Oblicz" HorizontalAlignment="Left" Height="37" Margin="158,343,0,0" VerticalAlignment="Top" Width="158" Click="Button_Click_1" Background="#FF0CE8D9"/>
+        <TextBox Visibility="Hidden" x:Name ="iloscDni" HorizontalAlignment="Left" Height="40" Margin="158,298,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="203" TextChanged="TextBox_TextChanged" Background="#FF0CE8D9" />
+        <Button Visibility="Hidden" Content="Oblicz" HorizontalAlignment="Left" Height="17" Margin="158,338,0,0" VerticalAlignment="Top" Width="22" Click="Button_Click_1" Background="#FF0CE8D9" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
         <TextBlock HorizontalAlignment="Left" Height="21" Margin="10,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"><Run Language="pl-pl" Text="Wybierz marke"/></TextBlock>
         <ComboBox x:Name="SamochodyInfo1" SelectionChanged="ComboBox_SelectionChanged12" HorizontalAlignment="Left" Margin="530,85,0,0" VerticalAlignment="Top" Width="4" Height="9" RenderTransformOrigin="0.5,0.5">
             <ComboBox.RenderTransform>

@@ -49,4 +49,4 @@
         </DataGrid>
         <Button Content="Klienci" HorizontalAlignment="Left" Height="35" Margin="314,238,0,0" Grid.Row="7" VerticalAlignment="Top" Width="79" Click="Button_Click_1" Background="#FF13FBEB"/>
     </Grid>
-</Window>
+    </Window>

@@ -33,7 +33,7 @@ namespace WPFProjekt
             InitializeComponent();
             string queryString = "SELECT Nazwisko  FROM  Klient";
 
-            string connectionString = "Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+            string connectionString = "Data Source=(local);Initial Catalog=Wypozyczalnia2;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);

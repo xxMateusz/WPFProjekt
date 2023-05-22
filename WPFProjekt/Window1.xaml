@@ -23,7 +23,7 @@
             </DataGrid.ItemsSource>
         </DataGrid>
         <Button Content="Pokaż oferte" HorizontalAlignment="Left" Height="95" Margin="15,175,0,0" VerticalAlignment="Top" Width="222" Click="Button_Click" Background="#FF38EAD5"/>
-        <ComboBox x:Name="Wybierz_miasto"  HorizontalAlignment="Left" Height="128" Margin="15,47,0,0" VerticalAlignment="Top" Width="143" SelectionChanged="ComboBox_SelectionChanged" Text="Miasto" Background="#FF6CD8C2">
+        <ComboBox x:Name="Wybierz_miasto"  HorizontalAlignment="Left" Height="109" Margin="15,47,0,0" VerticalAlignment="Top" Width="143" SelectionChanged="ComboBox_SelectionChanged" Text="Miasto" Background="#FF6CD8C2">
             <DataGrid />
             <ComboBoxItem>
                 <ComboBoxItem.DataContext>
@@ -55,7 +55,7 @@
             </DataGrid.RenderTransform>
         </DataGrid>
         <Button Content="Zamknij aplikacje" HorizontalAlignment="Left" Height="42" Margin="25,353,0,0" VerticalAlignment="Top" Width="202" Click="Button_Click_1" Background="#FF38EAD5"/>
-        <Button Content="Oblicz cene wynajmu" HorizontalAlignment="Left" Height="49" Margin="484,345,0,0" VerticalAlignment="Top" Width="173" Click="Button_Click_2" Background="#FF38EAD5"/>
+        <Button Content="Pokaz ceny modeli " HorizontalAlignment="Left" Height="49" Margin="484,345,0,0" VerticalAlignment="Top" Width="173" Click="Button_Click_2" Background="#FF38EAD5"/>
         <Button Content="Button" HorizontalAlignment="Left" Height="5" Margin="730,170,0,0" VerticalAlignment="Top" Width="10" Click="Button_Click_3" Background="#FF38EAD5" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
