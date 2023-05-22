@@ -63,17 +63,17 @@ namespace WPFProjekt
                 {
                     this.iloscDni = value;
                     OnPropertyChanged(nameof(IloscDni));
-                }
+            }
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
-        {
+            {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
-    }
 
     public partial class Window2 : Window
     {
@@ -240,16 +240,24 @@ namespace WPFProjekt
         {
             int liczbaDni;
             if (int.TryParse(iloscDni.Text, out liczbaDni))
-            {
-                if (Modele1.SelectedItem != null)
                 {
+
+                    SqlCommand command = new SqlCommand(queryString, connection);
+                    if (Modele1.SelectedItem != null)
+                    {
                     DataRowView selectedRow = (DataRowView)Modele1.SelectedItem;
                     int cenaZaDzien = Convert.ToInt32(selectedRow["CenaZaDzien"]);
                     int wynik = liczbaDni * cenaZaDzien;
-                    System.Windows.MessageBox.Show("Wynik: " + wynik.ToString());
-                }
-                else
-                {
+                                System.Windows.MessageBox.Show("Wynik: " + wynik.ToString());
+                            }
+                        }
+                        finally
+                        {
+                            reader.Close();
+                        }
+                    }
+                    else
+                    {
                     System.Windows.MessageBox.Show("Wybierz model samochodu.");
                 }
             }
