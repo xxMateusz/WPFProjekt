@@ -14,7 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using System.IO;
+using Path = System.IO.Path;
 namespace WPFProjekt
 {
     /// <summary>
@@ -22,7 +23,15 @@ namespace WPFProjekt
     /// </summary>
     public partial class Window3 : Window
     {
-        private string connectionString = "Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+        private string GetDatabaseFilePath()
+        {
+            string databaseFileName = "Wypozyczalnia2.mdf";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = @"Data\" + databaseFileName;
+            string filePath = Path.Combine(basePath, relativePath);
+            return filePath;
+        }
+       // private string connectionString = ($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={GetDatabaseFilePath()};Integrated Security=True;Connect Timeout=30");
         private List<Klient> listaKlientow;
         private System.Data.DataTable table;
         public Window3()
@@ -36,7 +45,7 @@ namespace WPFProjekt
             string nazwisko = NazwiskoTextBox.Text;
             string pesel = PeselTextBox.Text;
             string haslo = HasloPasswordBox.Password;
-
+            string connectionString = ($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={GetDatabaseFilePath()};Integrated Security=True;Connect Timeout=30");
             if (!string.IsNullOrWhiteSpace(imie) && !string.IsNullOrWhiteSpace(nazwisko) && !string.IsNullOrWhiteSpace(pesel) && !string.IsNullOrWhiteSpace(haslo))
             {
                 try
@@ -152,7 +161,7 @@ namespace WPFProjekt
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             string queryString = "Select Imie, Nazwisko From Klient";
-            string connectionString = "Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+            string connectionString = ($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={GetDatabaseFilePath()};Integrated Security=True;Connect Timeout=30");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

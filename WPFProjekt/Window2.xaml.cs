@@ -22,7 +22,8 @@ using System.Windows;
 using System.Collections;
 using WPFProjekt.UserControls;
 using System.Collections.ObjectModel;
-
+using System.IO;
+using Path = System.IO.Path;
 namespace WPFProjekt
 {
     /// <summary>
@@ -77,6 +78,14 @@ namespace WPFProjekt
 
     public partial class Window2 : Window
     {
+        private string GetDatabaseFilePath()
+        {
+            string databaseFileName = "Wypozyczalnia2.mdf";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string relativePath = @"Data\" + databaseFileName;
+            string filePath = Path.Combine(basePath, relativePath);
+            return filePath;
+        }
         private System.Data.DataTable table;
         public Window2()
         {
@@ -84,7 +93,7 @@ namespace WPFProjekt
             InitializeComponent();
             string queryString = "SELECT MarkaSamochodu  FROM  Samochod";
 
-            string connectionString = "Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+            string connectionString = ($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={GetDatabaseFilePath()};Integrated Security=True;Connect Timeout=30")    ;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -149,7 +158,7 @@ namespace WPFProjekt
         {
 
             string queryString = "Select MarkaSamochodu, ModelSamochodu, CenaZaDzien From Samochod";
-            string connectionString = "Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+            string connectionString = ($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={GetDatabaseFilePath()};Integrated Security=True;Connect Timeout=30");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -195,7 +204,7 @@ namespace WPFProjekt
 
             string selected = SamochodyInfo.SelectedItem.ToString();
             string queryString = "Select ModelSamochodu, CenaZaDzien From Samochod Where MarkaSamochodu = @MarkaSamochodu";
-            string connectionString = "Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+            string connectionString = ($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={GetDatabaseFilePath()};Integrated Security=True;Connect Timeout=30");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -288,7 +297,7 @@ namespace WPFProjekt
         {
             string selected = Modele1.SelectedItem.ToString();
             string queryString = "SELECT CenaZaDzien FROM Samochod ";
-            string connectionString = "Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+            string connectionString = ($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={GetDatabaseFilePath()};Integrated Security=True;Connect Timeout=30");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -326,7 +335,7 @@ namespace WPFProjekt
 
                 string selected = SamochodyInfo1.SelectedItem.ToString();
                 string queryString = "Select ModelSamochodu From Samochod Where MarkaSamochodu = @MarkaSamochodu";
-                string connectionString = "Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+                string connectionString = ($"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={GetDatabaseFilePath()};Integrated Security=True;Connect Timeout=30");
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
