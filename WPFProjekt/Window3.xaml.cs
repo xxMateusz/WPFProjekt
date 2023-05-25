@@ -22,7 +22,7 @@ namespace WPFProjekt
     /// </summary>
     public partial class Window3 : Window
     {
-        private string connectionString = "Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+        private string connectionString = (@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ateor\source\repos\Project1\Project1\Data\Wypozyczalnia2.mdf;Integrated Security=True;Connect Timeout=30");
         private List<Klient> listaKlientow;
         private System.Data.DataTable table;
         public Window3()
@@ -152,7 +152,7 @@ namespace WPFProjekt
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             string queryString = "Select Imie, Nazwisko From Klient";
-            string connectionString = "Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+            string connectionString = (@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ateor\source\repos\Project1\Project1\Data\Wypozyczalnia2.mdf;Integrated Security=True;Connect Timeout=30");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

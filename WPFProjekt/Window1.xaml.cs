@@ -31,7 +31,7 @@ namespace WPFProjekt
 
             
             string queryString = "SELECT Miasto  FROM  Adres";
-            string connectionString = @"Data Source=(local);Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+            string connectionString = (@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ateor\source\repos\Project1\Project1\Data\Wypozyczalnia2.mdf;Integrated Security=True;Connect Timeout=30");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -100,7 +100,7 @@ namespace WPFProjekt
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SqlConnection connetionString = new SqlConnection(@"Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True");
+            SqlConnection connetionString = new SqlConnection((@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ateor\source\repos\Project1\Project1\Data\Wypozyczalnia2.mdf;Integrated Security=True;Connect Timeout=30"));
             connetionString.Open();
             SqlCommand pokaz = new SqlCommand("Select Miasto From Adres", connetionString);
 
@@ -156,7 +156,7 @@ namespace WPFProjekt
             
             string selected = Wybierz_miasto.SelectedItem.ToString();
             string queryString = "Select Wypozyczalnia.NazwaWypożyczalni , Adres.Miasto From Wypozyczalnia Left Join Adres  On Wypozyczalnia.IdAdres=Adres.IdAdresu Where Adres.Miasto = @miasto";
-            string connectionString = @"Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+            string connectionString = (@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ateor\source\repos\Project1\Project1\Data\Wypozyczalnia2.mdf;Integrated Security=True;Connect Timeout=30");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -205,7 +205,7 @@ namespace WPFProjekt
         {
             string selected = Wybierz_miasto.SelectedItem.ToString();
             string queryString = "Select *  From Samochod Left Join Wypozyczalnia On Samochod.IdWypozyczalni = Wypozyczalnia.IdWypozyczalni Where Wypozyczalnia.NazwaWypożyczalni = @nazwaWypożyczalni";
-            string connectionString = @"Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+            string connectionString = (@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ateor\source\repos\Project1\Project1\Data\Wypozyczalnia2.mdf;Integrated Security=True;Connect Timeout=30");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

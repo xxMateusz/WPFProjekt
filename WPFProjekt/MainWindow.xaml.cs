@@ -33,7 +33,7 @@ namespace WPFProjekt
             InitializeComponent();
             string queryString = "SELECT Nazwisko  FROM  Klient";
 
-            string connectionString = "Data Source=(local);Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ateor\source\repos\Project1\Project1\Data\Wypozyczalnia2.mdf;Integrated Security=True;Connect Timeout=30";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
@@ -104,7 +104,7 @@ namespace WPFProjekt
         }
         private void Button_Click1(object sender, RoutedEventArgs e)
         {
-            SqlConnection connetionString = new SqlConnection("Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True");
+            SqlConnection connetionString = new SqlConnection((@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ateor\source\repos\Project1\Project1\Data\Wypozyczalnia2.mdf;Integrated Security=True;Connect Timeout=30"));
             connetionString.Open();
             SqlCommand pokaz = new SqlCommand("Select Nazwisko From Klient", connetionString);
 
@@ -121,7 +121,7 @@ namespace WPFProjekt
         {
             string selected = Login.SelectedItem.ToString();
             string queryString = "Select Klient.Nazwisko From Klient";
-            string connectionString = "Data Source=DESKTOP-CVD8VKU;Initial Catalog=Wypozyczalnia2;Integrated Security=True";
+            string connectionString = (@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\ateor\source\repos\Project1\Project1\Data\Wypozyczalnia2.mdf;Integrated Security=True;Connect Timeout=30");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
