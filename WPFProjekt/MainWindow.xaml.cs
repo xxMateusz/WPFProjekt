@@ -20,9 +20,7 @@ using System.IO;
 using Path = System.IO.Path;
 namespace WPFProjekt
     {
-    /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
-    /// </summary>
+
 
     public partial class MainWindow : Window
     {
@@ -48,19 +46,19 @@ namespace WPFProjekt
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
-                //command.Parameters.AddWithValue("@tPatSName", "Your-Parm-Value");
+               
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 try
                 {
                     while (reader.Read())
                     {
-                        Login.Items.Add((reader["Nazwisko"]));// etc
+                        Login.Items.Add((reader["Nazwisko"]));
                     }
                 }
                 finally
                 {
-                    // Always call Close when done reading.
+                
                     reader.Close();
                 }
             }
@@ -78,27 +76,27 @@ namespace WPFProjekt
         }
         private void MakeDataTableAndDisplay()
         {
-            // Create new DataTable and DataSource objects.
+            
             DataTable table = new DataTable();
 
-            // Declare DataColumn and DataRow variables.
+          
             DataColumn column;
             DataRow row;
             DataView view;
 
-            // Create new DataColumn, set DataType, ColumnName and add to DataTable.
+           
             column = new DataColumn();
             column.DataType = System.Type.GetType("System.Int32");
             column.ColumnName = "id";
             table.Columns.Add(column);
 
-            // Create second column.
+           
             column = new DataColumn();
             column.DataType = Type.GetType("System.String");
             column.ColumnName = "item";
             table.Columns.Add(column);
 
-            // Create new DataRow objects and add to DataTable.
+           
             for (int i = 0; i < 10; i++)
             {
                 row = table.NewRow();
@@ -107,11 +105,10 @@ namespace WPFProjekt
                 table.Rows.Add(row);
             }
 
-            // Create a DataView using the DataTable.
+            
             view = new DataView(table);
 
-            // Set a DataGrid control's DataSource to the DataView.
-            //  this.adresyGrid.DataSource = view;
+          
         }
         private void Button_Click1(object sender, RoutedEventArgs e)
         {
@@ -119,13 +116,13 @@ namespace WPFProjekt
             connetionString.Open();
             SqlCommand pokaz = new SqlCommand("Select Nazwisko From Klient", connetionString);
 
-            // ComboBox wypozyczalnie = new ComboBox();
+           
             string sql = "SELECT * FROM Klient";
             SqlDataAdapter adapter = new SqlDataAdapter(sql, connetionString);
             DataTable table = new DataTable();
             adapter.Fill(table);
 
-            //dg.ItemsSource = table.DefaultView;
+          
             connetionString.Close();
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -147,14 +144,7 @@ namespace WPFProjekt
                     table = new DataTable();
                     table.Load(reader);
 
-                    // Ustaw źródło danych DataGrid na DataTable
-                    // Login.ItemsSource = table.DefaultView;
-
-                    // Włącz automatyczne generowanie kolumn
-                    //  Login.AutoGenerateColumns = true;
-
-                    // Wyłącz możliwość dodawania nowych wierszy ręcznie
-                    //  Login.CanUserAddRows = false;
+                   
                 }
                 finally
                 {

@@ -18,9 +18,7 @@ using System.IO;
 using Path = System.IO.Path;
 namespace WPFProjekt
 {
-    /// <summary>
-    /// Logika interakcji dla klasy Window1.xaml
-    /// </summary>
+
     public partial class Window1 : Window
     {
         private System.Data.DataTable table;
@@ -45,19 +43,19 @@ namespace WPFProjekt
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
-                //command.Parameters.AddWithValue("@tPatSName", "Your-Parm-Value");
+             
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 try
                 {
                     while (reader.Read())
                     {
-                        Wybierz_miasto.Items.Add(( reader["Miasto"]));// etc
+                        Wybierz_miasto.Items.Add(( reader["Miasto"]));
                     }
                 }
                 finally
                 {
-                    // Always call Close when done reading.
+                
                     reader.Close();
                 }
             }
@@ -104,8 +102,7 @@ namespace WPFProjekt
             throw new NotImplementedException();
         }
         private void Calendar(object sender, EventArgs e)
-        {  //{ Calendar kalendarz = new Calendar();
-        //    kalendarz.SelectionMode = (CalendarSelectionMode)SelectionMode.Multiple;
+        {  
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -113,38 +110,38 @@ namespace WPFProjekt
             connetionString.Open();
             SqlCommand pokaz = new SqlCommand("Select Miasto From Adres", connetionString);
 
-            // ComboBox wypozyczalnie = new ComboBox();
+           
             string sql = "SELECT * FROM Adres";
             SqlDataAdapter adapter = new SqlDataAdapter(sql, connetionString);
             DataTable table = new DataTable();
             adapter.Fill(table);
            
-            //dg.ItemsSource = table.DefaultView;
+           
             connetionString.Close();
         }
         private void MakeDataTableAndDisplay()
         {
-            // Create new DataTable and DataSource objects.
+           
             DataTable table = new DataTable();
 
-            // Declare DataColumn and DataRow variables.
+           
             DataColumn column;
             DataRow row;
             DataView view;
 
-            // Create new DataColumn, set DataType, ColumnName and add to DataTable.
+           
             column = new DataColumn();
             column.DataType = System.Type.GetType("System.Int32");
             column.ColumnName = "id";
             table.Columns.Add(column);
 
-            // Create second column.
+          
             column = new DataColumn();
             column.DataType = Type.GetType("System.String");
             column.ColumnName = "item";
             table.Columns.Add(column);
 
-            // Create new DataRow objects and add to DataTable.
+           
             for (int i = 0; i < 10; i++)
             {
                 row = table.NewRow();
@@ -153,11 +150,9 @@ namespace WPFProjekt
                 table.Rows.Add(row);
             }
 
-            // Create a DataView using the DataTable.
+           
             view = new DataView(table);
-            ///hff
-            // Set a DataGrid control's DataSource to the DataView.
-          //  this.adresyGrid.DataSource = view;
+          
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -180,13 +175,13 @@ namespace WPFProjekt
                     table = new DataTable();
                     table.Load(reader);
 
-                    // Ustaw źródło danych DataGrid na DataTable
+                   
                     adresyGrid.ItemsSource = table.DefaultView;
 
-                    // Włącz automatyczne generowanie kolumn
+                   
                     adresyGrid.AutoGenerateColumns = true;
 
-                    // Wyłącz możliwość dodawania nowych wierszy ręcznie
+                   
                     adresyGrid.CanUserAddRows = false;
                 }
                 finally
@@ -229,13 +224,12 @@ namespace WPFProjekt
                     table = new DataTable();
                     table.Load(reader);
 
-                    // Ustaw źródło danych DataGrid na DataTable
                    oferta.ItemsSource = table.DefaultView;
 
-                    // Włącz automatyczne generowanie kolumn
+                  
                     oferta.AutoGenerateColumns = true;
 
-                    // Wyłącz możliwość dodawania nowych wierszy ręcznie
+                  
                     oferta.CanUserAddRows = false;
                 }
                 finally

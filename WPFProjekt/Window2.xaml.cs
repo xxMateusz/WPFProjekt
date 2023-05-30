@@ -26,10 +26,7 @@ using System.IO;
 using Path = System.IO.Path;
 namespace WPFProjekt
 {
-    /// <summary>
-    /// Logika interakcji dla klasy Window2.xaml
-    /// </summary>
-    /// 
+ 
     public class ViewModel : INotifyPropertyChanged
     {
         private Samochod selectedSamochod;
@@ -98,19 +95,19 @@ namespace WPFProjekt
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
-                //command.Parameters.AddWithValue("@tPatSName", "Your-Parm-Value");
+               
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 try
                 {
                     while (reader.Read())
                     {
-                        SamochodyInfo.Items.Add((reader["MarkaSamochodu"]));// etc
+                        SamochodyInfo.Items.Add((reader["MarkaSamochodu"]));
                     }
                 }
                 finally
                 {
-                    // Always call Close when done reading.
+                  
                     reader.Close();
                 }
             }
@@ -119,27 +116,27 @@ namespace WPFProjekt
      
         private void MakeDataTableAndDisplay()
         {
-            // Create new DataTable and DataSource objects.
+           
             DataTable table = new DataTable();
 
-            // Declare DataColumn and DataRow variables.
+         
             DataColumn column;
             DataRow row;
             DataView view;
 
-            // Create new DataColumn, set DataType, ColumnName and add to DataTable.
+          
             column = new DataColumn();
             column.DataType = System.Type.GetType("System.Int32");
             column.ColumnName = "id";
             table.Columns.Add(column);
 
-            // Create second column.
+         
             column = new DataColumn();
             column.DataType = Type.GetType("System.String");
             column.ColumnName = "item";
             table.Columns.Add(column);
 
-            // Create new DataRow objects and add to DataTable.
+          
             for (int i = 0; i < 10; i++)
             {
                 row = table.NewRow();
@@ -148,11 +145,10 @@ namespace WPFProjekt
                 table.Rows.Add(row);
             }
 
-            // Create a DataView using the DataTable.
+          
             view = new DataView(table);
 
-            // Set a DataGrid control's DataSource to the DataView.
-            //  this.adresyGrid.DataSource = view;
+          
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -176,10 +172,10 @@ namespace WPFProjekt
                    
                     Modele1.ItemsSource = table.DefaultView;
 
-                    // Włącz automatyczne generowanie kolumn
+              
                     Modele1.AutoGenerateColumns = true;
 
-                    // Wyłącz możliwość dodawania nowych wierszy ręcznie
+                    
                     Modele1.CanUserAddRows = false;
                 }
                 finally
@@ -190,14 +186,11 @@ namespace WPFProjekt
         }
         private void DataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int index = e.RowIndex;// get the Row Index
+            int index = e.RowIndex;
             DataRow selectedRow = table.Rows[index];
             string r = selectedRow.ToString();
             System.Windows.Forms.MessageBox.Show(r);
-            //textBoxID.Text = selectedRow.Cells[0].Value.ToString();
-            //textBoxFN.Text = selectedRow.Cells[1].Value.ToString();
-            //textBoxLN.Text = selectedRow.Cells[2].Value.ToString();
-            //textBoxAGE.Text = selectedRow.Cells[3].Value.ToString();
+           
 
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -220,13 +213,13 @@ namespace WPFProjekt
                     table = new DataTable();
                     table.Load(reader);
 
-                    // Ustaw źródło danych DataGrid na DataTable
+                  
                     Modele1.ItemsSource = table.DefaultView;
 
-                    // Włącz automatyczne generowanie kolumn
+                   
                     Modele1.AutoGenerateColumns = true;
 
-                    // Wyłącz możliwość dodawania nowych wierszy ręcznie
+                 
                     Modele1.CanUserAddRows = false;
                 }
                 finally
@@ -248,47 +241,7 @@ namespace WPFProjekt
         private void Button_Click_1(object sender, RoutedEventArgs e)
         { }
 
-//        private void Button_Click_1(object sender, RoutedEventArgs e)
-//        {
-//            int liczbaDni;
-//            if (int.TryParse(iloscDni.Text, out liczbaDni))
-//            {
-
-        //                SqlCommand command = new SqlCommand(queryString, connection);
-        //                if (Modele1.SelectedItem != null)
-        //                {
-        //                    DataRowView selectedRow = (DataRowView)Modele1.SelectedItem;
-        //                    int cenaZaDzien = Convert.ToInt32(selectedRow["CenaZaDzien"]);
-        //                    int wynik = liczbaDni * cenaZaDzien;
-        //                    System.Windows.MessageBox.Show("Wynik: " + wynik.ToString());
-        //                }
-
-        //                        finally
-        //                        {
-        //                    reader.Close();
-        //                }     }
-        //                    }
-        //                    else
-        //                    {
-        //                    System.Windows.MessageBox.Show("Wybierz model samochodu.");
-        //                }
-        //            }
-        //            else
-        //{
-        //    System.Windows.MessageBox.Show("Podaj poprawną liczbę dni.");
-        //}
-
-        //public IEnumerable<DataGridRow> GetDataGridRows(System.Windows.Controls.DataGrid grid)
-        //{
-        //    var itemsSource = grid.ItemsSource as IEnumerable;
-        //    if (null == itemsSource) yield return null;
-        //    foreach (var item in itemsSource)
-        //    {
-        //        var row = grid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
-        //        if (null != row) yield return row;
-        //    }
-        //}
-
+ 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -314,13 +267,12 @@ namespace WPFProjekt
                     table = new DataTable();
                     table.Load(reader);
 
-                    // Ustaw źródło danych DataGrid na DataTable
+                   
                     Models.ItemsSource = table.DefaultView;
 
-                    // Włącz automatyczne generowanie kolumn
+                 
                     Models.AutoGenerateColumns = true;
 
-                    // Wyłącz możliwość dodawania nowych wierszy ręcznie
                     Models.CanUserAddRows = false;
                 }
                 finally
@@ -351,13 +303,12 @@ namespace WPFProjekt
                         table = new DataTable();
                         table.Load(reader);
 
-                        // Ustaw źródło danych DataGrid na DataTable
+                     
                         Modele1.ItemsSource = table.DefaultView;
 
-                        // Włącz automatyczne generowanie kolumn
                         Modele1.AutoGenerateColumns = true;
 
-                        // Wyłącz możliwość dodawania nowych wierszy ręcznie
+                       
                         Modele1.CanUserAddRows = false;
                     }
                     finally
