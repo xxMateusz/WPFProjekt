@@ -29,11 +29,11 @@ namespace WPFProjekt
         private string GetDatabaseFilePath()
         {
             string databaseFileName = "Wypozyczalnia2.mdf";
-            string basePath = AppDomain.CurrentDomain.BaseDirectory;
-            string relativePath = @"Data\" + databaseFileName;
-            string filePath = Path.Combine(basePath, relativePath);
-          //  MessageBox.Show(filePath);
-            return filePath;
+            string currentDirectory = Directory.GetCurrentDirectory();
+            string projectDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent(currentDirectory).FullName).FullName).FullName;
+            string databaseFilePath = Path.Combine(projectDirectory, databaseFileName);
+
+            return databaseFilePath;
         }
 
 
